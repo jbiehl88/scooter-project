@@ -16,6 +16,9 @@ describe("User property tests", () => {
 	it("age should be a number", () => {
 		expect(typeof user.age).toBe("number")
 	})
+	it("loggedIn should be a boolean", () => {
+		expect(typeof user.loggedIn).toBe("boolean")
+	})
 })
 
 // test login
@@ -24,8 +27,21 @@ it("login tester", () => {
 	expect(user.loggedIn).toBe(true)
 })
 
+it("login error tester", () => {
+	expect(() => {
+		user.login("test12").toThrow("Username or password is incorrect")
+	})
+})
+
 // test logout
 it("logout tester", () => {
 	user.logout()
 	expect(user.loggedIn).toBe(false)
+})
+
+it("logout error tester", () => {
+	user.loggedIn = false
+	expect(() => {
+		user.logout().toThrow("no such user is logged in")
+	})
 })

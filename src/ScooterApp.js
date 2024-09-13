@@ -78,7 +78,7 @@ class ScooterApp {
 			}
 		}
 		scooter.dock(station)
-		console.log("scooter is docked")
+		console.log(`Scooter #${scooter.serial} is docked`)
 		arrStation.push(scooter)
 		return
 	}
@@ -109,14 +109,5 @@ class ScooterApp {
 		console.log(`Station3: ${this.stations.station3.length}`)
 	}
 }
-
-// const instance1 = new ScooterApp()
-// instance1.registerUser("JohnB", "123", 18)
-// instance1.createScooter("station1")
-// instance1.createScooter("station1")
-// instance1.loginUser("JohnB", "123")
-// instance1.rentScooter(1, "JohnB")
-// instance1.dockScooter(1, "station1")
-// instance1.print()
 
 module.exports = ScooterApp

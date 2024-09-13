@@ -23,6 +23,12 @@ describe("scooter methods", () => {
 		newScooter.rent("JohnB")
 		expect(newScooter.station).toBe(null)
 	})
+	it("test rent Error", () => {
+		newScooter.charge = 19
+		expect(() => {
+			newScooter.rent("JohnB").toThrow("scooter needs to charge or scooter needs repair")
+		})
+	})
 	// dock method
 	it("test dock() user", () => {
 		newScooter.dock("station1")
