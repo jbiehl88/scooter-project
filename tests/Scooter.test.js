@@ -1,5 +1,7 @@
 const Scooter = require("../src/Scooter")
 
+jest.setTimeout(120000)
+
 // typeof scooter === object
 describe("scooter object", () => {
 	test("Scooter class should create Scooter instance", () => {
@@ -31,8 +33,18 @@ describe("scooter methods", () => {
 		expect(newScooter.station).toBe("station1")
 	})
 	// requestRepair method
-	// it("test requestRepair()", () => {})
+	it("test requestRepair()", async () => {
+		const scooter = new Scooter("station1")
+		scooter.isBroken = true
+		await scooter.requestRepair()
+		expect(scooter.isBroken).toEqual(false)
+	})
 
 	// charge method
-	// it("test charge()", () => {})
+	it("test recharge()", async () => {
+		const scooter = new Scooter("station1")
+		scooter.charge = 50
+		await scooter.recharge()
+		expect(scooter.charge).toEqual(100)
+	})
 })

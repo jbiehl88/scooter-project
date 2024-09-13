@@ -25,28 +25,49 @@ class Scooter {
 		}
 	}
 
-	recharge() {
-		const timer = setInterval(() => {
-			if (this.station != null && this.charge != 100) {
-				this.charge += 1
-				console.log(`Scooter is at ${this.charge}% charge!`)
-			} else {
-				clearInterval(timer)
-				console.log("Charging is complete or no longer at station")
-			}
-		}, 1000)
+	//recharge was set to increment by 10 since setting at 1 took a long time
+	// but setting at 1 was still completing the test
+	async recharge() {
+		while (this.station !== null && this.charge < 100) {
+			await new Promise((resolve) => setTimeout(resolve, 1000))
+			this.charge += 10
+			console.log(`Scooter is at ${this.charge}% charge!`)
+		}
+		console.log("Charging is complete or no longer at station")
 	}
 
-	requestRepair() {
-		const timer = setInterval(() => {
-			if (this.isBroken == true) {
-				this.isBroken = false
-			} else {
-				clearInterval(timer)
-				console.log(`repair completed`)
-			}
-		}, 2500)
+	async requestRepair() {
+		if (this.isBroken == true) {
+			await new Promise((resolve) => setTimeout(resolve, 5000))
+			this.isBroken = false
+			console.log(`repair completed`)
+		}
 	}
+
+	// ******* methods before trying to design a test *******
+
+	// recharge() {
+	// 	const timer = setInterval(() => {
+	// 		if (this.station != null && this.charge != 100) {
+	// 			this.charge += 1
+	// 			console.log(`Scooter is at ${this.charge}% charge!`)
+	// 		} else {
+	// 			clearInterval(timer)
+	// 			console.log("Charging is complete or no longer at station")
+	// 		}
+	// 	}, 1000)
+	// }
+
+	// requestRepair() {
+	// 	const timer = setInterval(() => {
+	// 		if (this.isBroken == true) {
+	// 			this.isBroken = false
+	// 		} else {
+	// 			clearInterval(timer)
+	// 			console.log(`repair completed`)
+	// 		}
+	// 	}, 2500)
+	// }
 }
 
 module.exports = Scooter
